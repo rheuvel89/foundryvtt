@@ -3,8 +3,8 @@ version: "3.8"
 services:
   foundryvtt:
     environment:
-      TIMED_URL=${TIMED_URL:?err0.1}
-    image: rheuvel/repo:foundryvtt_app
+      TIMED_URL: ${TIMED_URL:?err0.1}
+    image: rheuvel/repo:foundryvtt-app
     restart: always
     expose:
       - "30000"
@@ -15,7 +15,7 @@ services:
   proxy:
     environment:
       BASE_URL: "${BASE_URL:?err1.1}"
-    image: rheuvel/repo:foundryvtt_proxy
+    image: rheuvel/repo:foundryvtt-reverseproxy
     restart: always
     ports:
       - "80:80"
