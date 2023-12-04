@@ -22,3 +22,19 @@ services:
       - "443:443"
     volumes:
       - /usr/share/nginx/certificates:/usr/share/nginx/certificates
+
+  certbot:
+    environment:
+      DOMAIN: "${BASE_URL:?err2.1}"
+      EMAIL: "${CERT_EMAIL:?err2.2}"
+      TENTANT_ID: "${AZURE_DNS_TENTANT_ID:?err2.3}"
+      CLIENT_ID: "${AZURE_DNS_CLIENT_ID:?err2.4}"
+      CLIENT_SECRET: "${AZURE_DNS_CLIENT_SECRET:?err2.5}"
+      DNS_ZONE: "${AZURE_DNS_DNS_ZONE:?err2.6}"
+    image: rheuvel/certbot_azure
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /usr/share/nginx/certificates:/usr/share/nginx/certificates
