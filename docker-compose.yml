@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  foundryvtt:
+  foundryvtt1:
     environment:
       TIMED_URL: ${TIMED_URL:?err0.1}
     image: rheuvel/repo:foundryvtt-app
@@ -10,7 +10,32 @@ services:
       - "30000"
     volumes:
       - /usr/share/foundryvtt:/app/foundryvtt
-      - /usr/share/foundrydata:/app/foundrydata
+      - /usr/share/foundryshare:/app/foundryshare
+      - foundrydata1:/app/foundrydata
+
+  foundryvtt2:
+    environment:
+      TIMED_URL: ${TIMED_URL:?err0.1}
+    image: rheuvel/repo:foundryvtt-app
+    restart: always
+    expose:
+      - "30000"
+    volumes:
+      - /usr/share/foundryvtt:/app/foundryvtt
+      - /usr/share/foundryshare:/app/foundryshare
+      - foundrydata2:/app/foundrydata
+
+  foundryvtt3:
+    environment:
+      TIMED_URL: ${TIMED_URL:?err0.1}
+    image: rheuvel/repo:foundryvtt-app
+    restart: always
+    expose:
+      - "30000"
+    volumes:
+      - /usr/share/foundryvtt:/app/foundryvtt
+      - /usr/share/foundryshare:/app/foundryshare
+      - foundrydata3:/app/foundrydata
 
   proxy:
     environment:
