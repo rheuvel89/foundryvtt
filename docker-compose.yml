@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.6"
 
 services:
   foundryvtt1:
@@ -16,6 +16,7 @@ services:
   foundryvtt2:
     environment:
       TIMED_URL: ${TIMED_URL:?err0.1}
+      DELAY: true
     image: rheuvel/repo:foundryvtt-app
     restart: always
     expose:
@@ -28,6 +29,7 @@ services:
   foundryvtt3:
     environment:
       TIMED_URL: ${TIMED_URL:?err0.1}
+      DELAY: true
     image: rheuvel/repo:foundryvtt-app
     restart: always
     expose:
@@ -50,13 +52,18 @@ services:
 
   certbot:
     environment:
-      DOMAIN: "${BASE_URL:?err2.1}"
-      EMAIL: "${CERT_EMAIL:?err2.2}"
-      TENANT_ID: "${AZURE_DNS_TENANT_ID:?err2.3}"
-      CLIENT_ID: "${AZURE_DNS_CLIENT_ID:?err2.4}"
-      CLIENT_SECRET: "${AZURE_DNS_CLIENT_SECRET:?err2.5}"
-      DNS_ZONE: "${AZURE_DNS_DNS_ZONE:?err2.6}"
+      - DOMAIN=${BASE_URL}
+      - EMAIL=${CERT_EMAIL}
+      - TENANT_ID={AZURE_DNS_TENANT_ID}
+      - CLIENT_ID={AZURE_DNS_CLIENT_ID}
+      - CLIENT_SECRET=${AZURE_DNS_CLIENT_SECRET}
+      - DNS_ZONE=${AZURE_DNS_DNS_ZONE}
     image: rheuvel/certbot_azure
     restart: always
     volumes:
       - /usr/share/nginx/certificates:/usr/share/nginx/certificates
+
+volumes:
+  foundrydata1:
+  foundrydata2:
+  foundrydata3:

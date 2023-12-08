@@ -1,5 +1,5 @@
 #!/bin/sh
-
+if [ -z $DELAY ]; then sleep 0; else sleep 60 fi
 if ! test -f /app/foundryvtt.zip; then
     wget -O /app/foundryvtt.zip "${TIMED_URL}"
 else 
