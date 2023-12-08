@@ -16,7 +16,7 @@ services:
   foundryvtt2:
     environment:
       TIMED_URL: ${TIMED_URL:?err0.1}
-      DELAY: true
+      DELAY: "true"
     image: rheuvel/repo:foundryvtt-app
     restart: always
     expose:
@@ -29,7 +29,7 @@ services:
   foundryvtt3:
     environment:
       TIMED_URL: ${TIMED_URL:?err0.1}
-      DELAY: true
+      DELAY: "true"
     image: rheuvel/repo:foundryvtt-app
     restart: always
     expose:
