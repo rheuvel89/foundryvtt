@@ -12,3 +12,4 @@ if ! test -f /app/foundryvtt/done; then
 else
     echo "FoundryVTT already unzipped"
 fi
+node /app/foundryvtt/resources/app/main.js --dataPath=/app/foundrydata
