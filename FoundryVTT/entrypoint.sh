@@ -8,6 +8,7 @@ fi
 
 if ! test -f /app/foundryvtt/done; then
     unzip /app/foundryvtt.zip -d /app/foundryvtt \
+    && ln -s /app/foundryshare/ foundrydata/Data/shared
     && touch /app/foundryvtt/done
 else
     echo "FoundryVTT already unzipped"
