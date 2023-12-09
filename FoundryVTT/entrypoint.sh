@@ -8,10 +8,12 @@ fi
 
 if ! test -f /app/foundryvtt/done; then
     unzip /app/foundryvtt.zip -d /app/foundryvtt \
-    && mkdir -p /app/foundrydata/Data \
-    && ln -s /app/foundryshare/ foundrydata/Data/shared \
     && touch /app/foundryvtt/done
 else
     echo "FoundryVTT already unzipped"
 fi
+
+if test -d /app/foundrydata/Data; then echo Data exists; else mkdir -p /app/foundrydata/Data; fi
+if [ -L /app/foundrydata/Data/shared ]; then echo Link exists; else ln -s /app/foundryshare/ /app/foundrydata/Data/shared; fi
+
 node /app/foundryvtt/resources/app/main.js --dataPath=/app/foundrydata
