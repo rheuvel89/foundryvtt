@@ -1,0 +1,14 @@
+
+  foundryvtt_${LOCATION_SUB}:
+    environment:
+      TIMED_URL: ${TIMED_URL:?err0.1}
+    image: rheuvel/repo:foundryvtt-app
+    restart: always
+    expose:
+      - "30000"
+    volumes:
+      - /usr/share/foundryvtt:/app/foundryvtt
+      - /usr/share/foundryshare:/app/foundryshare
+      - foundrydata_${LOCATION_SUB}:/app/foundrydata
+
+      

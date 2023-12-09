@@ -1,7 +1,9 @@
 FROM nginx:alpine
 WORKDIR /var/www/web
 RUN apk add inotify-tools openssl
-COPY ./ReverseProxy/nginx-template.conf /etc/nginx/nginx-template.conf
+COPY ./ReverseProxy/nginx-location-template.conf /etc/nginx/nginx-location-template.conf
+COPY ./ReverseProxy/nginx-template-start.conf /etc/nginx/nginx-template-start.conf
+COPY ./ReverseProxy/nginx-template-end.conf /etc/nginx/nginx-template-end.conf
 COPY ./ReverseProxy/entrypoint.sh /
 RUN ["chmod", "+x", "/entrypoint.sh"]
 ENTRYPOINT ["/entrypoint.sh"]

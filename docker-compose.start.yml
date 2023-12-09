@@ -1,0 +1,29 @@
+version: "3.6"
+
+services:
+  proxy:
+    environment:
+      BASE_URL: "${BASE_URL:?err1.1}"
+      SUBLIST: "${SUBLIST}"
+    image: rheuvel/repo:foundryvtt-reverseproxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /usr/share/nginx/certificates:/usr/share/nginx/certificates
+
+  certbot:
+    environment:
+      - DOMAIN=${BASE_URL}
+      - EMAIL=${CERT_EMAIL}
+      - TENANT_ID={AZURE_DNS_TENANT_ID}
+      - CLIENT_ID={AZURE_DNS_CLIENT_ID}
+      - CLIENT_SECRET=${AZURE_DNS_CLIENT_SECRET}
+      - DNS_ZONE=${AZURE_DNS_DNS_ZONE}
+    image: rheuvel/certbot_azure
+    restart: always
+    volumes:
+      - /usr/share/nginx/certificates:/usr/share/nginx/certificates
+
+      
