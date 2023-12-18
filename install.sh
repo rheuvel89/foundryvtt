@@ -2,6 +2,13 @@
 
 # This script is used to install the docker-compose file and start the containers
 
+if [ $(dpkg-query -W -f='${Status}' docker 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+  apt-get install -y ca-certificates curl
+fi
+curl -fsSl https://raw.githubusercontent.com/rheuvel89/foundryvtt/main/docker-compose.start.yml -o docker-compose.start.yml
+curl -fsSl https://raw.githubusercontent.com/rheuvel89/foundryvtt/main/docker-compose.instance.yml -o docker-compose.instance.yml
+
 # Split the subs lista and create the docker-compose.yml file
 SUBLIST=$0
 SUBS=$(echo $SUBLIST | tr ";" "\n")
