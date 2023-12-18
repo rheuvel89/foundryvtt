@@ -2,8 +2,10 @@
 
 # This script is used to install the docker-compose file and start the containers
 
-if [ $(dpkg-query -W -f='${Status}' docker 2>/dev/null | grep -c "ok installed") -eq 0 ];
+if command -v "curl" > /dev/null 2>&1; 
 then
+  echo "Curl is already installed"
+else
   apt-get install -y ca-certificates curl
 fi
 curl -fsSl https://raw.githubusercontent.com/rheuvel89/foundryvtt/main/docker-compose.start.yml -o docker-compose.start.yml
@@ -21,8 +23,10 @@ do
 done
 
 # Install docker and docker-compose
-if [ $(dpkg-query -W -f='${Status}' docker 2>/dev/null | grep -c "ok installed") -eq 0 ];
+if command -v "docker" > /dev/null 2>&1; 
 then
+  echo "Docker is already installed"
+else
   apt-get update
   apt-get install -y ca-certificates curl gnupg
   install -m 0755 -d /etc/apt/keyrings
