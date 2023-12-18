@@ -9,6 +9,6 @@
     volumes:
       - /usr/share/foundryvtt:/app/foundryvtt
       - /usr/share/foundryshare:/app/foundryshare
-      - foundrydata_${LOCATION_SUB}:/app/foundrydata
+      - /usr/share/foundrydata_${LOCATION_SUB}:/app/foundrydata
 
       
