@@ -8,18 +8,19 @@ then
 else
   apt-get install -y ca-certificates curl
 fi
-curl -fsSl https://raw.githubusercontent.com/rheuvel89/foundryvtt/main/docker-compose.start.yml -o docker-compose.start.yml
-curl -fsSl https://raw.githubusercontent.com/rheuvel89/foundryvtt/main/docker-compose.instance.yml -o docker-compose.instance.yml
+mkdir foundryinstalltemp
+curl -fsSl https://raw.githubusercontent.com/rheuvel89/foundryvtt/main/docker-compose.start.yml -o foundryinstalltemp/docker-compose.start.yml
+curl -fsSl https://raw.githubusercontent.com/rheuvel89/foundryvtt/main/docker-compose.instance.yml -o foundryinstalltemp/docker-compose.instance.yml
 
 # Split the subs lista and create the docker-compose.yml file
 SUBLIST=$1
 SUBS=$(echo $SUBLIST | tr ";" "\n")
 
-cat docker-compose.start.yml | sed 's|${SUBLIST}|'${SUBLIST}'|g' > docker-compose.yml
+cat foundryinstalltemp/docker-compose.start.yml | sed 's|${SUBLIST}|'${SUBLIST}'|g' > docker-compose.yml
 
 for SUB in $SUBS
 do
-    cat docker-compose.instance.yml | sed 's|${LOCATION_SUB}|'${SUB}'|g' >> docker-compose.yml
+    cat foundryinstalltemp/docker-compose.instance.yml | sed 's|${LOCATION_SUB}|'${SUB}'|g' >> docker-compose.yml
 done
 
 # Install docker and docker-compose
@@ -44,3 +45,6 @@ fi
 # Pull the images and start the containers
 docker-compose --env-file default.env pull 
 docker-compose --env-file default.env up -d
+
+# Clean up
+rm -rf foundryinstalltemp
