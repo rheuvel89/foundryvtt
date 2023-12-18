@@ -12,7 +12,7 @@ curl -fsSl https://raw.githubusercontent.com/rheuvel89/foundryvtt/main/docker-co
 curl -fsSl https://raw.githubusercontent.com/rheuvel89/foundryvtt/main/docker-compose.instance.yml -o docker-compose.instance.yml
 
 # Split the subs lista and create the docker-compose.yml file
-SUBLIST=$0
+SUBLIST=$1
 SUBS=$(echo $SUBLIST | tr ";" "\n")
 
 cat docker-compose.start.yml | sed 's|${SUBLIST}|'${SUBLIST}'|g' > docker-compose.yml
@@ -42,5 +42,5 @@ else
 fi
 
 # Pull the images and start the containers
-docker-compose pull --env-file default.env
-docker-compose up --env-file default.env -d
+docker-compose --env-file default.env pull 
+docker-compose --env-file default.env up -d
