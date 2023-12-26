@@ -17,7 +17,7 @@ services:
     environment:
       - DOMAIN=${BASE_URL}
       - EMAIL=${CERT_EMAIL}
-      - TENANT_ID=$AZURE_DNS_TENANT_ID}
+      - TENANT_ID=${AZURE_DNS_TENANT_ID}
       - CLIENT_ID=${AZURE_DNS_CLIENT_ID}
       - CLIENT_SECRET=${AZURE_DNS_CLIENT_SECRET}
       - DNS_ZONE=${AZURE_DNS_DNS_ZONE}
